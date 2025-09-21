@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmachida <mmachida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 11:55:16 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/20 15:13:28 by mmachida         ###   ########.fr       */
+/*   Created: 2024/05/29 12:45:12 by mmachida          #+#    #+#             */
+/*   Updated: 2025/09/21 15:21:08 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lst.h"
 
-t_list	*ft_lstlast(t_list *lst)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	t_list	*work;
-
-	if (!lst)
-		return (NULL);
-	work = lst;
-	while (work->next != NULL)
-	{
-		work = work->next;
-	}
-	return (work);
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	free(lst);
 }

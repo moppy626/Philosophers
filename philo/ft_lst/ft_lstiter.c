@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmachida <mmachida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 11:31:50 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/20 15:13:09 by mmachida         ###   ########.fr       */
+/*   Created: 2024/05/29 14:23:22 by mmachida          #+#    #+#             */
+/*   Updated: 2025/09/21 15:21:10 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lst.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_list	*first;
+	t_list	*work;
 
-	first = *lst;
-	new->next = first;
-	*lst = new;
+	if (!lst || !f)
+		return ;
+	work = lst;
+	while (work != NULL)
+	{
+		f(work->content);
+		work = work->next;
+	}
 }

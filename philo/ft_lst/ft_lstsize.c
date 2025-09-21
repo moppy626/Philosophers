@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmachida <mmachida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 11:06:33 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/20 15:13:35 by mmachida         ###   ########.fr       */
+/*   Created: 2024/05/29 11:44:58 by mmachida          #+#    #+#             */
+/*   Updated: 2025/09/21 15:21:17 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lst.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_lstsize(t_list *lst)
 {
-	t_list	*list;
+	t_list	*work;
+	int		i;
 
-	list = malloc(sizeof(t_list));
-	if (!list)
-		return (NULL);
-	list->content = content;
-	list->next = NULL;
-	return (list);
+	if (!lst)
+		return (0);
+	work = lst;
+	i = 1;
+	while (work->next != NULL)
+	{
+		work = work->next;
+		i++;
+	}
+	return (i);
 }

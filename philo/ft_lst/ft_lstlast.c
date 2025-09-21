@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmachida <mmachida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 12:26:29 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/20 15:13:04 by mmachida         ###   ########.fr       */
+/*   Created: 2024/05/29 11:55:16 by mmachida          #+#    #+#             */
+/*   Updated: 2025/09/21 15:21:12 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lst.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_list	*ft_lstlast(t_list *lst)
 {
 	t_list	*work;
 
-	if (!lst || !(*lst))
+	if (!lst)
+		return (NULL);
+	work = lst;
+	while (work->next != NULL)
 	{
-		*lst = new;
-		return ;
+		work = work->next;
 	}
-	else
-	{
-		work = ft_lstlast(*lst);
-		work->next = new;
-	}
+	return (work);
 }
