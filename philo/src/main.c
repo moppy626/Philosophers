@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:38:59 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/23 20:35:34 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/24 12:04:07 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	delete_data(t_data	*data)
 {
 	if (data)
 		free (data);
+	// pthread_mutex_destroy(&data->mutex_print);
 }
 
 void	delete_philo(void *list)
@@ -36,6 +37,16 @@ void	delete_philo(void *list)
 		free (philo);
 	}
 }
+
+// int		init_mutex(t_data	*data)
+// {
+// 	// pthread_mutex_t mutex;
+
+// 	if (pthread_mutex_init(&data->mutex_print, NULL) < 0)
+// 		return (err_and_return_int("init_mutex", strerror(errno)));
+
+// 	return (0);
+// }
 
 t_data	*init_data(int argc, char *argv[])
 {

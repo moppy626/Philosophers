@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/23 20:42:09 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/24 11:54:03 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ typedef struct s_data
 	long			starttime;
 	int				stoped;
 	pthread_t		thread_monitor;
+	t_list			*forks;
+	pthread_mutex_t mutex_print;
 	int				num_of_philo;
 	int				time_to_die;
 	int				time_to_eat;
