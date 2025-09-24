@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:38:59 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/24 12:04:07 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/24 16:39:35 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,26 @@
 #include "philosopher.h"
 #include "tools.h"
 
+void	delete_fork(void	*list)
+{
+	t_fork	*fork;
+
+	fork = (t_fork *)list;
+	if (fork)
+	{
+		pthread_mutex_destroy(&fork->mutex_fork);
+		free (fork);
+	}
+}
+
 void	delete_data(t_data	*data)
 {
 	if (data)
+	{
+		pthread_mutex_destroy(&data->mutex_print);
+		ft_lstclear(&data->forks, &delete_fork);
 		free (data);
-	// pthread_mutex_destroy(&data->mutex_print);
+	}
 }
 
 void	delete_philo(void *list)
@@ -31,22 +46,31 @@ void	delete_philo(void *list)
 	philo = (t_philo *)list;
 	if (philo)
 	{
-		//if (philo->thread)
-		//	free(philo->thread);
 		pthread_mutex_destroy(&philo->mutex_philo);
 		free (philo);
 	}
 }
 
-// int		init_mutex(t_data	*data)
-// {
-// 	// pthread_mutex_t mutex;
+ int		init_mutex(t_data	*data)
+ {
+	int				idx;
+	t_fork			*fork;
+	t_list			*tmp;
 
-// 	if (pthread_mutex_init(&data->mutex_print, NULL) < 0)
-// 		return (err_and_return_int("init_mutex", strerror(errno)));
-
-// 	return (0);
-// }
+ 	if (pthread_mutex_init(&data->mutex_print, NULL) < 0)
+ 		return (err_and_return_int("init_mutex", strerror(errno)));
+	idx = 0;
+	data->forks = NULL;
+	while(idx < data->num_of_philo)
+	{
+		fork = malloc(sizeof(t_fork));
+		pthread_mutex_init(&fork->mutex_fork, NULL);
+		tmp = ft_lstnew(fork);
+		ft_lstadd_back(&data->forks, tmp);
+		idx++;
+	}
+ 	return (0);
+ }
 
 t_data	*init_data(int argc, char *argv[])
 {
@@ -71,6 +95,8 @@ t_data	*init_data(int argc, char *argv[])
 		data->specified_eat_time = 0;
 		data->num_of_eat_time = 0;
 	}
+	if (init_mutex(data) < 0)
+		return (NULL);
 	return (data);
 }
 
