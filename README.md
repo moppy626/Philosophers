@@ -29,17 +29,17 @@
 # メイン関数
 
 - [ ] 入力エラーチェック  
-- [ ] 構造体を初期化  
-- [ ] フォークの数だけ `pthread_mutex_init`  
-- [ ] printf 用の `pthread_mutex_init`  
-- [ ] データ参照用の `pthread_mutex_init`  
-- [ ] 哲学者の数だけ `pthread_create`  
-- [ ] 監視スレッドを `pthread_create`  
-- [ ] 哲学者の数だけ `pthread_join`  
-- [ ] 監視スレッドを `pthread_join`  
-- [ ] フォークの数だけ `pthread_mutex_destroy`  
-- [ ] printf 用の `pthread_mutex_destroy`  
-- [ ] 哲学者データ参照用の `pthread_mutex_destroy`
+- [x] 構造体を初期化  
+- [X] フォークの数だけ `pthread_mutex_init`  
+- [x] printf 用の `pthread_mutex_init`  
+- [x] データ参照用の `pthread_mutex_init`  
+- [x] 哲学者の数だけ `pthread_create`  
+- [x] 監視スレッドを `pthread_create`  
+- [x] 哲学者の数だけ `pthread_join`  
+- [x] 監視スレッドを `pthread_join`  
+- [x] フォークの数だけ `pthread_mutex_destroy`  
+- [x] printf 用の `pthread_mutex_destroy`  
+- [x] 哲学者データ参照用の `pthread_mutex_destroy`
 
 ---
 
@@ -67,7 +67,7 @@
 # 監視スレッドの中
 
 - 各哲学者が全員処理終了になるまでループ  
-	- [ ] 哲学者分ループ  
-		- [ ] 最後に食事した時間 > time_to_die 超過の場合  
-			- [ ] `timestamp_in_ms X died` を出力 ※1 2  
-			- [ ] 終了フラグを立てて処理を抜ける
+	- [x] 哲学者ループ  
+		- [x] 最後に食事した時間 > time_to_die 超過の場合  
+			- [x] `timestamp_in_ms X died` を出力 ※1 2  
+			- [x] 終了フラグを立てて処理を抜ける
