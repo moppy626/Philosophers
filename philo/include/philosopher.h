@@ -6,14 +6,12 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/23 16:56:18 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/23 20:42:09 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h> // pthread_t
 #include "ft_lst.h"
-
-#define NUM_THREADS 3
 
 typedef struct s_data
 {

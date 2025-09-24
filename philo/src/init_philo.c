@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:00:51 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/23 15:56:08 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/23 20:43:49 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ t_list	*init_philo(t_data	*data)
 {
 	t_list	*philos;
 	
-	int idx = 0;
+	int idx = 1;
 
 	philos = NULL;
-	while (idx < NUM_THREADS)
+	while (idx < data->num_of_philo + 1)
 	{
 		if (add_new_philo(&philos, idx, data) < 0)
 			return (NULL);

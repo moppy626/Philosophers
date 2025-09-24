@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:21 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/23 16:24:56 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/23 20:50:05 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void* thread_monitor(void* arg)
 			printf("ID:%d\n", philo->id);
 			time = get_elapsed_time(philo->lastmeal_time);
 			printf("time:%ld\n", time);
-			if (time > 5000)
+			if (time > philo->d->time_to_die * 1000) // TEST
 			{
 				printf("      Stopped\n");
 				philo->d->stoped = 1;
