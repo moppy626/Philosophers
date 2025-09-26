@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/24 18:16:54 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/26 13:35:35 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #endif
 	
 #define MONITOR_SLEEP 500
+#define MICRO_MILI 1000
 
 typedef struct s_data
 {
@@ -32,6 +33,7 @@ typedef struct s_data
 	int				specified_eat_time;
 	t_list			*forks;
 	pthread_mutex_t mutex_print;
+	pthread_mutex_t mutex_data;
 }	t_data;
 
 typedef struct s_philo
@@ -42,7 +44,6 @@ typedef struct s_philo
 	long			lastmeal_time;
 	int				num_of_meals;
 	pthread_t		thread;
-	pthread_mutex_t mutex_philo;
 	t_data			*d;
 }	t_philo;
 
@@ -59,4 +60,4 @@ void* 	thread_monitor(void* arg);
 int		wait_threads(t_list	*philos, t_data *data);
 int		create_threads(t_list	*list, t_data *data);
 t_list	*init_philo(t_data	*data);
-int		err_and_return_int(char *func, char *msg);
+int		print_stat(t_data *data, int id, char *msg);

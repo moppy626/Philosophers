@@ -6,11 +6,12 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:21 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/24 16:38:21 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/26 13:44:41 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+#include "tools.h"
 #include <stdio.h>
 
 int	all_full(t_list	*list)
@@ -22,7 +23,7 @@ int	all_full(t_list	*list)
 	while (tmp)
 	{
 		philo = (t_philo *)tmp->content;
-		if (philo->num_of_meals < philo->d->num_of_eat_time)
+		if (get_num_of_meals(philo) < philo->d->num_of_eat_time)
 			return (0);
 	}
 	if (DEBUG)
@@ -48,13 +49,14 @@ void* thread_monitor(void* arg)
 		{
 			usleep(MONITOR_SLEEP);
 			philo = (t_philo *)tmp->content;
-			time = get_elapsed_time(philo->lastmeal_time);
-			if (DEBUG)
-				printf("[thread_monitor]ID:%d time:%ld\n", philo->id, time);
+			time = get_elapsed_time(get_lastmeal_time(philo));
+
+			//if (DEBUG)
+			//	printf("[thread_monitor]ID:%d time:%ld\n", philo->id, time);
 			if (time > philo->d->time_to_die)
 			{
-				printf("%ld %d died\n", time, philo->id);
-				philo->d->stoped = 1;
+				print_stat(philo->d, philo->id, "died");
+				set_stopped(&philo->d, 1);
 				break ;
 			}
 			if (philo->d->specified_eat_time && all_full(list))

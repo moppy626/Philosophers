@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:38:59 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/24 16:39:35 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/26 13:51:22 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	delete_data(t_data	*data)
 	if (data)
 	{
 		pthread_mutex_destroy(&data->mutex_print);
+		pthread_mutex_destroy(&data->mutex_data);
 		ft_lstclear(&data->forks, &delete_fork);
 		free (data);
 	}
@@ -46,31 +47,57 @@ void	delete_philo(void *list)
 	philo = (t_philo *)list;
 	if (philo)
 	{
-		pthread_mutex_destroy(&philo->mutex_philo);
 		free (philo);
 	}
 }
 
- int		init_mutex(t_data	*data)
+ int		init_forks(t_data	*data)
  {
 	int				idx;
 	t_fork			*fork;
 	t_list			*tmp;
 
- 	if (pthread_mutex_init(&data->mutex_print, NULL) < 0)
- 		return (err_and_return_int("init_mutex", strerror(errno)));
 	idx = 0;
 	data->forks = NULL;
 	while(idx < data->num_of_philo)
 	{
 		fork = malloc(sizeof(t_fork));
-		pthread_mutex_init(&fork->mutex_fork, NULL);
+		if (pthread_mutex_init(&fork->mutex_fork, NULL) < 0)
+			return (err_and_return_int("init_forks"));
 		tmp = ft_lstnew(fork);
+		if (!tmp)
+			return (err_and_return_int("init_forks"));
 		ft_lstadd_back(&data->forks, tmp);
 		idx++;
 	}
  	return (0);
  }
+
+void		set_args(t_data	**data, int argc, char *argv[])
+{
+	(*data)->num_of_philo = ft_atoi(argv[1]);
+	(*data)->time_to_die = ft_atoi(argv[2]);
+	(*data)->time_to_eat = ft_atoi(argv[3]);
+	(*data)->time_to_sleep = ft_atoi(argv[4]);
+	if (argc >= 6)
+	{
+		(*data)->specified_eat_time = 1;
+		(*data)->num_of_eat_time = ft_atoi(argv[5]);
+	}
+	else
+	{
+		(*data)->specified_eat_time = 0;
+		(*data)->num_of_eat_time = 0;
+	}
+	if (DEBUG)
+	{
+		printf("   num_of_philo:%d\n", (*data)->num_of_philo);
+		printf("   time_to_die:%d\n", (*data)->time_to_die);
+		printf("   time_to_eat:%d\n", (*data)->time_to_eat);
+		printf("   time_to_sleep:%d\n", (*data)->time_to_sleep);
+		printf("   num_of_eat_time:%d\n", (*data)->num_of_eat_time);
+	}
+}
 
 t_data	*init_data(int argc, char *argv[])
 {
@@ -81,30 +108,27 @@ t_data	*init_data(int argc, char *argv[])
 		return (NULL);
 	data->stoped = 0;
 	data->starttime = get_current_time();
-	data->num_of_philo = ft_atoi(argv[1]);
-	data->time_to_die = ft_atoi(argv[2]);
-	data->time_to_eat = ft_atoi(argv[3]);
-	data->time_to_sleep = ft_atoi(argv[4]);
-	if (argc >= 6)
-	{
-		data->specified_eat_time = 1;
-		data->num_of_eat_time = ft_atoi(argv[5]);
-	}
-	else
-	{
-		data->specified_eat_time = 0;
-		data->num_of_eat_time = 0;
-	}
-	if (init_mutex(data) < 0)
+	set_args(&data, argc, argv);
+ 	if (pthread_mutex_init(&data->mutex_print, NULL) < 0)
+ 		return (err_and_return_NULL("init_data"));
+	if (pthread_mutex_init(&data->mutex_data, NULL) < 0)
+		return (err_and_return_NULL("init_data"));
+	if (init_forks(data) < 0)
 		return (NULL);
 	return (data);
+}
+
+int	arg_error(char *msg)
+{
+	printf("%s\n", msg);
+	return (-1);
 }
 
 int	check_args(int argc, char *argv[])
 {
 	(void)argv;
 	if(!(argc == 5 || argc == 6))
-		return (err_and_return_int(NULL, "The argument must be either 3 or 4"));
+		return (arg_error("The argument must be either 3 or 4"));
 	return (0);
 }
 
@@ -112,6 +136,7 @@ int main(int argc, char *argv[]) {
 	t_data	*data;
 	t_list	*philos;
 
+	printf("argc:%d, argv[%d]:%s\n", argc, argc - 1, argv[argc - 1]);
 	if (check_args(argc, argv) < 0)
 		return (-1);
 	data = init_data(argc, argv);

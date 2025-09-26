@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.h                                            :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/23 16:49:00 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/26 12:49:05 by mmachida         ###   ########.fr       */
+/*   Created: 2025/09/23 15:04:53 by mmachida          #+#    #+#             */
+/*   Updated: 2025/09/25 11:49:38 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_atoi(const char *str);
-int		err_and_return_int(char *func);
-void	*err_and_return_NULL(char *func);
-void	set_stopped(t_data **data, int val);
-int		get_stopped(t_data *data);
-void	set_lastmeal_time(t_philo **philo, long val);
-long	get_lastmeal_time(t_philo *philo);
-void	add_num_of_meals(t_philo **philo);
-int		get_num_of_meals(t_philo *philo);
+#include <stdio.h>
+
+int	err_and_return_int(char *func)
+{
+	if (func)
+		fprintf(stderr, "Failed in %s\n", func);
+	return (-1);
+}
+
+void	*err_and_return_NULL(char *func)
+{
+	if (func)
+		fprintf(stderr, "Failed in %s\n", func);
+	return (NULL);
+}

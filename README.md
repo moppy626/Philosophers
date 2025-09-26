@@ -12,6 +12,7 @@
 	- 食事回数上限が設定されているかどうか(specified_eat_time)
 - フォークのぶんの mutex リスト(forks)
 - printf 用 mutex(mutex_print)
+- データ参照制御用の mutex(mutex_data)  
 
 ## 各哲学者データ  
 - 哲学者id(id)  
@@ -20,7 +21,6 @@
 - 最後に食事した時刻(lastmeal_time)  
 - 食事回数(num_of_meals)  
 - 哲学者スレッド(thread)  
-- データ参照制御用の mutex(mutex_philo)  
 - メイン構造体(d)
  
 
@@ -45,19 +45,19 @@
 
 # 哲学者ごとのスレッドの中
 
-- 哲学者が一人だけの場合、フォークを持って一定時間経過後死亡
+- [x] 哲学者が一人だけの場合、フォークを持ってtime_to_die待機
 - ループ  
-	- 終了フラグが立っていたら return する  
-	- 奇数は右→左、偶数は左→右 と順序を変えてフォークを確保  
-		- [ ] `timestamp_in_ms X has taken a fork` を出力 ※1 2 3  
-		- [ ] `timestamp_in_ms X is eating` を出力 ※1 2 3  
-			- [ ] 食事時間分待機  
-			- [ ] 食事回数追加  
-			- [ ] フォーク確保を解除  
-			- [ ] 食事回数上限を超えていたら return する  
-		- [ ] `timestamp_in_ms X is sleeping` を出力 ※1 2 3  
+	- [x] 終了フラグが立っていたら return する  
+	- [ ] 奇数は右→左、偶数は左→右 と順序を変えてフォークを確保  
+		- [x] `timestamp_in_ms X has taken a fork` を出力 ※1 2 3  
+		- [x] `timestamp_in_ms X is eating` を出力 ※1 2 3  
+			- [x] 食事時間分待機  
+			- [x] 食事回数追加  
+			- [x] フォーク確保を解除  
+			- [x] 食事回数上限を超えていたら break する  
+		- [x] `timestamp_in_ms X is sleeping` を出力 ※1 2 3  
 			- 睡眠時間分待機  
-		- [ ] `timestamp_in_ms X is thinking` を出力 ※1 2 3  
+		- [x] `timestamp_in_ms X is thinking` を出力 ※1 2 3  
 - ※1 printf 用 mutex を見て出力する  
 - ※2 データ参照・更新前は mutex を見る  
 - ※3 毎回終了フラグを見て立っていたら出力しない  
@@ -71,3 +71,5 @@
 		- [x] 最後に食事した時間 > time_to_die 超過の場合  
 			- [x] `timestamp_in_ms X died` を出力 ※1 2  
 			- [x] 終了フラグを立てて処理を抜ける
+		- [x] 全員が規定回数食事が終わっていた場合、処理を抜ける
+
