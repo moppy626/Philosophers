@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_time.c                                         :+:      :+:    :+:   */
+/*   time_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:21:33 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/21 15:21:37 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/28 23:17:26 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/time.h> // gettimeofday
 #include <unistd.h> // NULL
 #include <limits.h> // LONG_MAX
+#include "tools.h"
+
 /*
 	現在時刻を取得する(ms)
 */
+#include <stdio.h>
 long	get_current_time()
 {
 	struct timeval	tv;
@@ -24,8 +27,9 @@ long	get_current_time()
 
 	if (gettimeofday(&tv, NULL) < 0)
 		return (-1);
-	tv_sec = tv.tv_sec * 1000;
-	tv_usec = tv.tv_usec / 1000;
+	tv_sec = tv.tv_sec * 1000000;
+	tv_usec = tv.tv_usec;
+	// printf("tv_sec:%ld, tv_usec:%ld\n", tv_sec, tv_usec);
 	return (tv_sec + tv_usec);
 }
 /*
@@ -39,8 +43,43 @@ long	get_elapsed_time(long ref_time)
 	current = get_current_time();
 	if (current < 0)
 		return (-1);
-	if (-current > LONG_MAX - ref_time)
-		return (-1);
 	ret = current - ref_time;
 	return (ret);
+}
+
+#define REMAIN_TIME 5000
+/*
+	引数をマイクロ秒で指定すると待機する
+*/
+void	wait_micro_s(long wait_time)
+{
+	long	start_time;
+	long	elapsed_time;
+
+	start_time = get_current_time();
+	if (wait_time > REMAIN_TIME)
+		usleep(wait_time - REMAIN_TIME);
+	while (1)
+	{
+		elapsed_time = get_elapsed_time(start_time);
+		if (elapsed_time >= wait_time)
+		break ;
+		usleep(1);
+	}
+}
+
+/*
+	msからμsに変換する
+*/
+long	to_ms(long micro_s)
+{
+	return (micro_s / MICRO_MILI);
+}
+
+/*
+	μsからmsに変換する
+*/
+long	to_micros(long mili_s)
+{
+	return (mili_s * MICRO_MILI);
 }

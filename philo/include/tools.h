@@ -6,9 +6,12 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 16:49:00 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/26 12:49:05 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/28 23:18:10 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philosopher.h"
+#define MICRO_MILI 1000
 
 int		ft_atoi(const char *str);
 int		err_and_return_int(char *func);
@@ -19,3 +22,8 @@ void	set_lastmeal_time(t_philo **philo, long val);
 long	get_lastmeal_time(t_philo *philo);
 void	add_num_of_meals(t_philo **philo);
 int		get_num_of_meals(t_philo *philo);
+long	get_current_time();
+long	get_elapsed_time(long ref_time);
+long	to_ms(long micro_s);
+void	wait_micro_s(long wait_time);
+long	to_micros(long mili_s);

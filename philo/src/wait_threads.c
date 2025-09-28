@@ -6,13 +6,12 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:55:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/25 11:54:29 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/28 23:21:59 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <errno.h>
-#include "philosopher.h"
 #include "tools.h"
 
 int	wait_threads(t_list	*philos, t_data *data)

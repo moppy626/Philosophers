@@ -6,13 +6,12 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:00:51 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/25 12:45:43 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/28 23:21:39 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <errno.h>
-#include "philosopher.h"
 #include "tools.h"
 
 int	add_new_philo(t_list **list, int id, t_data *data);

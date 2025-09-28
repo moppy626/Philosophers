@@ -6,11 +6,10 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:21 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/26 13:44:41 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/28 23:21:23 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
 #include "tools.h"
 #include <stdio.h>
 
@@ -25,6 +24,7 @@ int	all_full(t_list	*list)
 		philo = (t_philo *)tmp->content;
 		if (get_num_of_meals(philo) < philo->d->num_of_eat_time)
 			return (0);
+		tmp = tmp->next;
 	}
 	if (DEBUG)
 		printf("all stopped\n");
@@ -47,13 +47,13 @@ void* thread_monitor(void* arg)
 			tmp = tmp->next;
 		if (tmp)
 		{
-			usleep(MONITOR_SLEEP);
+			wait_micro_s(10);
 			philo = (t_philo *)tmp->content;
 			time = get_elapsed_time(get_lastmeal_time(philo));
 
 			//if (DEBUG)
 			//	printf("[thread_monitor]ID:%d time:%ld\n", philo->id, time);
-			if (time > philo->d->time_to_die)
+			if (time >= (to_micros(philo->d->time_to_die)))
 			{
 				print_stat(philo->d, philo->id, "died");
 				set_stopped(&philo->d, 1);

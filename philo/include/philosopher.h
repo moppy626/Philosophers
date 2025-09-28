@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/26 13:35:35 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/28 23:16:49 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # define DEBUG 0
 #endif
 	
-#define MONITOR_SLEEP 500
-#define MICRO_MILI 1000
+#define MONITOR_SLEEP 200
 
 typedef struct s_data
 {
@@ -52,9 +51,6 @@ typedef struct s_fork
 	pthread_mutex_t mutex_fork;
 }	t_fork;
 
-
-long	get_current_time();
-long	get_elapsed_time(long ref_time);
 void* 	thread_philo(void* arg);
 void* 	thread_monitor(void* arg);
 int		wait_threads(t_list	*philos, t_data *data);

@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:38:59 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/26 13:51:22 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/28 23:20:51 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
-#include "philosopher.h"
 #include "tools.h"
 
 void	delete_fork(void	*list)
