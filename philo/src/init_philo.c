@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:00:51 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 11:48:18 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/29 15:39:19 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	add_new_philo(t_list **list, int id, t_data *data);
 t_list	*init_philo(t_data	*data)
 {
 	t_list	*philos;
-	
-	int idx = 1;
+	int		idx;
 
+	idx = 1;
 	philos = NULL;
 	while (idx < data->num_of_philo + 1)
 	{
@@ -32,11 +32,10 @@ t_list	*init_philo(t_data	*data)
 	return (philos);
 }
 
-#include <stdio.h>
 int	add_new_philo(t_list **list, int id, t_data *data)
 {
 	t_philo	*philo;
-	t_list 	*tmp;
+	t_list	*tmp;
 
 	philo = (t_philo *)malloc(sizeof(t_philo));
 	if (!philo)
@@ -47,7 +46,6 @@ int	add_new_philo(t_list **list, int id, t_data *data)
 		philo->left_fork = 0;
 	else
 		philo->left_fork = id;
-	//printf("id:%d right:%d left:%d\n", philo->id, philo->right_fork, philo->left_fork);
 	philo->lastmeal_time = data->starttime;
 	philo->num_of_meals = 0;
 	philo->d = data;

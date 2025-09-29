@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_stat.c                                       :+:      :+:    :+:   */
+/*   data_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/25 13:21:56 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 15:40:34 by mmachida         ###   ########.fr       */
+/*   Created: 2025/09/25 13:59:48 by mmachida          #+#    #+#             */
+/*   Updated: 2025/09/29 15:24:35 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h> // pthread_t
-#include <stdio.h> // printf
-#include "tools.h"
+#include "philosopher.h"
 
-int	print_stat(t_data *data, int id, char *msg)
+void	set_stopped(t_data **data, int val)
 {
-	long	now;
+	pthread_mutex_lock(&(*data)->mutex_data);
+	(*data)->stoped = val;
+	pthread_mutex_unlock(&(*data)->mutex_data);
+}
 
-	if (get_stopped(data))
-		return (-1);
-	pthread_mutex_lock(&data->mutex_print);
-	now = get_elapsed_time(data->starttime);
-	printf("%ld %d %s\n", to_ms(now), id, msg);
-	pthread_mutex_unlock(&data->mutex_print);
-	return (0);
+int	get_stopped(t_data *data)
+{
+	int	ret;
+
+	pthread_mutex_lock(&data->mutex_data);
+	ret = data->stoped;
+	pthread_mutex_unlock(&data->mutex_data);
+	return (ret);
 }

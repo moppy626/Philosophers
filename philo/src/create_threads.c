@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:58:25 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 11:48:09 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/29 15:38:17 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	create_threads(t_list	*list, t_data *data)
 	int		result;
 
 	tmp = list;
-	while(tmp)
+	while (tmp)
 	{
 		philo = tmp->content;
 		result = pthread_create(&philo->thread, NULL, thread_philo, philo);

@@ -6,12 +6,12 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:28:15 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/23 12:03:06 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/29 15:36:13 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef FT_LST_H
+# define FT_LST_H
 
 # include <stdlib.h>
 # include <unistd.h>

@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:21:33 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 12:07:13 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/29 15:51:52 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #include <limits.h> // LONG_MAX
 #include "tools.h"
 
+long	get_current_time(void)
+
 /*
 	現在時刻を取得する(ms)
 */
-#include <stdio.h>
-long	get_current_time()
 {
 	struct timeval	tv;
 	long			tv_sec;
@@ -29,9 +29,9 @@ long	get_current_time()
 		return (-1);
 	tv_sec = tv.tv_sec * 1000000;
 	tv_usec = tv.tv_usec;
-	// printf("tv_sec:%ld, tv_usec:%ld\n", tv_sec, tv_usec);
 	return (tv_sec + tv_usec);
 }
+
 /*
 	パラメタの時刻からの経過時間を取得する(ms)
 */
@@ -64,7 +64,7 @@ void	wait_micro_s(long wait_time, t_data *data)
 			elapsed_time = get_elapsed_time(start_time);
 			if (elapsed_time >= (wait_time - REMAIN_TIME))
 				break ;
-			if (data->stoped)
+			if (get_stopped(data))
 				return ;
 			usleep(1000);
 		}
@@ -74,7 +74,7 @@ void	wait_micro_s(long wait_time, t_data *data)
 		elapsed_time = get_elapsed_time(start_time);
 		if (elapsed_time >= wait_time)
 			break ;
-		if (data->stoped)
+		if (get_stopped(data))
 			return ;
 		usleep(1);
 	}

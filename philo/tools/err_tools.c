@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:04:53 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 11:48:36 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/29 15:49:57 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	err_and_return_int(char *func, char *msg)
 	return (-1);
 }
 
-void	*err_and_return_NULL(char *func)
+void	*err_and_return_null(char *func)
 {
 	if (func)
 		fprintf(stderr, "Failed in %s\n", func);

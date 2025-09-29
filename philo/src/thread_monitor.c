@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:21 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 12:04:11 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/29 15:42:13 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,37 +31,30 @@ int	all_full(t_list	*list)
 	return (1);
 }
 
-void* thread_monitor(void* arg)
+void	*thread_monitor(void *arg)
 {
 	t_list	*tmp;
-	t_list	*list = (t_list *)arg;
+	t_list	*list;
 	t_philo	*philo;
-	long	time;
 
+	list = (t_list *)arg;
 	tmp = list;
 	while (1)
 	{
+		tmp = tmp->next;
 		if (!tmp)
 			tmp = list;
-		else
-			tmp = tmp->next;
-		if (tmp)
+		philo = (t_philo *)tmp->content;
+		if (get_elapsed_time(get_lastmeal_time(philo))
+			>= (to_micros(philo->d->time_to_die)))
 		{
-			philo = (t_philo *)tmp->content;
-			time = get_elapsed_time(get_lastmeal_time(philo));
-
-			//if (DEBUG)
-			//	printf("[thread_monitor]ID:%d time:%ld\n", philo->id, time);
-			if (time >= (to_micros(philo->d->time_to_die)))
-			{
-				print_stat(philo->d, philo->id, "died");
-				set_stopped(&philo->d, 1);
-				break ;
-			}
-			if (philo->d->specified_eat_time && all_full(list))
-				break ;
-			wait_micro_s(10, philo->d);
+			print_stat(philo->d, philo->id, "died");
+			set_stopped(&philo->d, 1);
+			break ;
 		}
+		if (philo->d->specified_eat_time && all_full(list))
+			break ;
+		wait_micro_s(10, philo->d);
 	}
-    return (NULL);
+	return (NULL);
 }
