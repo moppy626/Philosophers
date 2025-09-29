@@ -6,12 +6,12 @@
 #    By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/23 13:58:21 by mmachida          #+#    #+#              #
-#    Updated: 2025/09/28 22:47:46 by mmachida         ###   ########.fr        #
+#    Updated: 2025/09/29 12:16:55 by mmachida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc -Wall -Wextra -Werror -D DEBUG=1
-NAME = Philosophers
+CC = cc -Wall -Wextra -Werror #-D DEBUG=1
+NAME = philo
 
 SRC_PHILO = main.c thread_monitor.c thread_philo.c \
 			wait_threads.c create_threads.c init_philo.c print_stat.c

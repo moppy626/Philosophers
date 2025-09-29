@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:21:33 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/28 23:17:26 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/29 12:07:13 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,33 @@ long	get_elapsed_time(long ref_time)
 
 #define REMAIN_TIME 5000
 /*
-	引数をマイクロ秒で指定すると待機する
+	マイクロ秒で指定された引数分待機する
 */
-void	wait_micro_s(long wait_time)
+void	wait_micro_s(long wait_time, t_data *data)
 {
 	long	start_time;
 	long	elapsed_time;
 
 	start_time = get_current_time();
 	if (wait_time > REMAIN_TIME)
-		usleep(wait_time - REMAIN_TIME);
+	{
+		while (1)
+		{
+			elapsed_time = get_elapsed_time(start_time);
+			if (elapsed_time >= (wait_time - REMAIN_TIME))
+				break ;
+			if (data->stoped)
+				return ;
+			usleep(1000);
+		}
+	}
 	while (1)
 	{
 		elapsed_time = get_elapsed_time(start_time);
 		if (elapsed_time >= wait_time)
-		break ;
+			break ;
+		if (data->stoped)
+			return ;
 		usleep(1);
 	}
 }

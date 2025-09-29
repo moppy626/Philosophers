@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/28 23:16:49 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:08:49 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_philo
 typedef struct s_fork
 {
 	pthread_mutex_t mutex_fork;
+	t_list			*waiting;
 }	t_fork;
 
 void* 	thread_philo(void* arg);

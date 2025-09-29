@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"stdio.h": "c",
+		"ft_lst.h": "c",
+		"pthread.h": "c"
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:21 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/28 23:21:23 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/29 12:04:11 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void* thread_monitor(void* arg)
 			tmp = tmp->next;
 		if (tmp)
 		{
-			wait_micro_s(10);
 			philo = (t_philo *)tmp->content;
 			time = get_elapsed_time(get_lastmeal_time(philo));
 
@@ -61,6 +60,7 @@ void* thread_monitor(void* arg)
 			}
 			if (philo->d->specified_eat_time && all_full(list))
 				break ;
+			wait_micro_s(10, philo->d);
 		}
 	}
     return (NULL);

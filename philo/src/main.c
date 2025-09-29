@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:38:59 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/28 23:20:51 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:29:05 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	delete_fork(void	*list)
 	if (fork)
 	{
 		pthread_mutex_destroy(&fork->mutex_fork);
+		if (fork->waiting)
+			ft_lstclear(&fork->waiting, NULL);
 		free (fork);
 	}
 }
@@ -63,6 +65,7 @@ void	delete_philo(void *list)
 		fork = malloc(sizeof(t_fork));
 		if (pthread_mutex_init(&fork->mutex_fork, NULL) < 0)
 			return (err_and_return_int("init_forks"));
+		fork->waiting = NULL;
 		tmp = ft_lstnew(fork);
 		if (!tmp)
 			return (err_and_return_int("init_forks"));
@@ -123,11 +126,58 @@ int	arg_error(char *msg)
 	return (-1);
 }
 
+/*
+	空白を判定する
+*/
+int	is_space(char c)
+{
+	if ((9 <= c && c <= 13) || c == 32)
+		return (1);
+	else
+		return (0);
+}
+
+/*
+	int型に収まる値かどうか調べる
+*/
+int	check_int(const char *str)
+{
+	long	num;
+	int		i;
+
+	i = 0;
+	while (is_space((char)str[i]))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			return (arg_error("Argument must be positive value\n"));
+	num = 0;
+	if (!('0' <= str[i] && str[i] <= '9'))
+		return (arg_error("Argument must be Integer\n"));
+	while (str[i])
+	{
+		if (!('0' <= str[i] && str[i] <= '9'))
+			return (arg_error("Argument must be Integer\n"));
+		else if (num > (INT_MAX - (str[i] - '0')) / 10)
+			return (arg_error("Out of int range\n"));
+		num = (num * 10) + (str[i++] - '0');
+	}
+	return (0);
+}
+
 int	check_args(int argc, char *argv[])
 {
-	(void)argv;
+	int	idx;
+
 	if(!(argc == 5 || argc == 6))
 		return (arg_error("The argument must be either 3 or 4"));
+	idx = 1;
+	while (idx < argc)
+	{
+		if (check_int(argv[idx]) < 0)
+			return (-1);
+		idx++;
+	}
 	return (0);
 }
 
@@ -135,7 +185,6 @@ int main(int argc, char *argv[]) {
 	t_data	*data;
 	t_list	*philos;
 
-	printf("argc:%d, argv[%d]:%s\n", argc, argc - 1, argv[argc - 1]);
 	if (check_args(argc, argv) < 0)
 		return (-1);
 	data = init_data(argc, argv);
