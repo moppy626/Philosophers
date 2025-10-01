@@ -28,7 +28,7 @@
 
 # メイン関数
 
-- [ ] 入力エラーチェック  
+- [x] 入力エラーチェック  
 - [x] 構造体を初期化  
 - [X] フォークの数だけ `pthread_mutex_init`  
 - [x] printf 用の `pthread_mutex_init`  
