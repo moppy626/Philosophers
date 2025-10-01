@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 13:59:48 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 15:34:45 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/01 12:57:10 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,16 @@ void	upd_fork_waitinglist(t_philo *philo, t_fork *fork)
 	free(fork->waiting);
 	fork->waiting = next;
 	pthread_mutex_unlock(&philo->d->mutex_data);
+}
+
+int	get_fork_waiting_status(t_philo *philo, t_fork *fork)
+{
+	t_list	*tmp;
+	int		*status;
+
+	pthread_mutex_lock(&philo->d->mutex_data);
+	tmp = fork->waiting;
+	status = (int *)tmp->content;
+	pthread_mutex_unlock(&philo->d->mutex_data);
+	return (*status);
 }
