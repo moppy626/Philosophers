@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:04:55 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/01 14:57:45 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/01 15:31:41 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	eating(t_philo *philo)
 	}
 	print_stat(philo->d, philo->id, "is eating");
 	set_lastmeal_time(&philo, get_current_time());
-	add_num_of_meals(&philo);
 	wait_micro_s(to_micros(philo->d->time_to_eat), philo->d);
+	add_num_of_meals(&philo);
 	pthread_mutex_unlock(&right_fork->mutex_fork);
 	pthread_mutex_unlock(&left_fork->mutex_fork);
 	return (0);

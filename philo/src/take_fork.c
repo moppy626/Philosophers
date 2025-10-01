@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:20:43 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/01 12:55:56 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/01 15:25:42 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_fork	*take_fork(t_philo *philo, int forkid)
 	add_fork_waitinglist(philo, fork);
 	while (1)
 	{
-		usleep(10);
+		usleep(100);
 		if (philo->id == get_fork_waiting_status(philo, fork))
 		{
 			upd_fork_waitinglist(philo, fork);
