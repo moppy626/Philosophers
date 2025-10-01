@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:21 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 15:42:13 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/01 15:01:27 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,14 @@ int	all_full(t_list	*list)
 void	*thread_monitor(void *arg)
 {
 	t_list	*tmp;
-	t_list	*list;
 	t_philo	*philo;
 
-	list = (t_list *)arg;
-	tmp = list;
+	tmp = (t_list *)arg;
 	while (1)
 	{
 		tmp = tmp->next;
 		if (!tmp)
-			tmp = list;
+			tmp = (t_list *)arg;
 		philo = (t_philo *)tmp->content;
 		if (get_elapsed_time(get_lastmeal_time(philo))
 			>= (to_micros(philo->d->time_to_die)))
@@ -52,8 +50,11 @@ void	*thread_monitor(void *arg)
 			set_stopped(&philo->d, 1);
 			break ;
 		}
-		if (philo->d->specified_eat_time && all_full(list))
+		if (philo->d->specified_eat_time && all_full((t_list *)arg))
+		{
+			set_stopped(&philo->d, 1);
 			break ;
+		}
 		wait_micro_s(10, philo->d);
 	}
 	return (NULL);

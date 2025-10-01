@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:04:55 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 16:05:21 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/01 14:57:45 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,9 @@ void	*thread_philo(void *arg)
 		eating(philo);
 		if (get_stopped(philo->d))
 			return (NULL);
-		if (philo->d->specified_eat_time
-			&& get_num_of_meals(philo) >= philo->d->num_of_eat_time)
-				return (NULL);
 		sleeping(philo);
+		if (get_stopped(philo->d))
+			return (NULL);
 		thinking(philo);
 	}
 	return (NULL);
