@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 16:49:00 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/01 12:55:35 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/09 14:09:37 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int		ft_atoi(const char *str);
 int		err_and_return_int(char *func);
 void	*err_and_return_null(char *func);
-void	set_stopped(t_data **data, int val);
+void	set_stopped(t_data *data, int val);
 int		get_stopped(t_data *data);
 void	set_lastmeal_time(t_philo **philo, long val);
 long	get_lastmeal_time(t_philo *philo);

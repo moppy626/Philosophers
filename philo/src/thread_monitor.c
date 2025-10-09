@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:21 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/01 15:01:27 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/09 14:09:54 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,12 @@ void	*thread_monitor(void *arg)
 		if (get_elapsed_time(get_lastmeal_time(philo))
 			>= (to_micros(philo->d->time_to_die)))
 		{
-			print_stat(philo->d, philo->id, "died");
-			set_stopped(&philo->d, 1);
+			print_died(philo->d, philo->id);
 			break ;
 		}
 		if (philo->d->specified_eat_time && all_full((t_list *)arg))
 		{
-			set_stopped(&philo->d, 1);
+			set_stopped(philo->d, 1);
 			break ;
 		}
 		wait_micro_s(10, philo->d);

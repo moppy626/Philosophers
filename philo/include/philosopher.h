@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 15:48:58 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:48:30 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		wait_threads(t_list	*philos, t_data *data);
 int		create_threads(t_list	*list, t_data *data);
 t_list	*init_philo(t_data	*data);
 int		print_stat(t_data *data, int id, char *msg);
+int		print_died(t_data *data, int id);
 int		check_args(int argc, char *argv[]);
 t_data	*init_data(int argc, char *argv[]);
 t_fork	*take_fork(t_philo *philo, int forkid);

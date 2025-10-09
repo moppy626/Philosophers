@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:04:55 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/07 11:56:26 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/09 14:42:48 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ int	eating(t_philo *philo)
 		left_fork = take_fork(philo, philo->left_fork);
 		right_fork = take_fork(philo, philo->right_fork);
 	}
-	print_stat(philo->d, philo->id, "is eating");
-	set_lastmeal_time(&philo, get_current_time());
-	wait_micro_s(to_micros(philo->d->time_to_eat), philo->d);
-	add_num_of_meals(&philo);
+	if (!print_stat(philo->d, philo->id, "is eating"))
+	{
+		set_lastmeal_time(&philo, get_current_time());
+		wait_micro_s(to_micros(philo->d->time_to_eat), philo->d);
+		add_num_of_meals(&philo);
+	}
 	pthread_mutex_unlock(&right_fork->mutex_fork);
 	pthread_mutex_unlock(&left_fork->mutex_fork);
 	return (0);
@@ -39,7 +41,9 @@ int	eating(t_philo *philo)
 
 int	sleeping(t_philo *philo)
 {
-	print_stat(philo->d, philo->id, "is sleeping");
+	int	ret;
+
+	ret = print_stat(philo->d, philo->id, "is sleeping");
 	wait_micro_s(to_micros(philo->d->time_to_sleep), philo->d);
 	return (0);
 }
@@ -62,7 +66,7 @@ void	*thread_philo(void *arg)
 		return (NULL);
 	}
 	if (philo->id % 2 == 0)
-		usleep(100);
+		wait_micro_s(50, philo->d);
 	while (1)
 	{
 		if (get_stopped(philo->d))
