@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:04:55 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/14 18:32:36 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/14 19:06:30 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	*thread_philo(void *arg)
 		return (NULL);
 	}
 	if (philo->id % 2 == 0)
-		wait_micro_s(200, philo->d);
+		wait_micro_s(to_micros(philo->d->time_to_eat / 2), philo->d);
 	while (1)
 	{
 		if (get_stopped(philo->d))

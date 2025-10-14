@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:02:27 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/14 18:37:48 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/14 19:13:37 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_args(int argc, char *argv[])
 		idx++;
 	}
 	if (ft_atoi(argv[1]) > PHILO_MAX)
-		return (arg_error("Keep the number of philo at 310 or few"));
+		return (arg_error("Keep the number of philo at 201 or few"));
 	return (0);
 }
 

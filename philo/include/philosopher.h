@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/14 18:37:40 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/14 19:28:32 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # endif
 
 # define MONITOR_SLEEP 200
-# define PHILO_MAX 310
+# define PHILO_MAX 201
 
 typedef struct s_data
 {
