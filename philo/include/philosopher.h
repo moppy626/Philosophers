@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/09 13:48:30 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/14 18:37:40 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # endif
 
 # define MONITOR_SLEEP 200
+# define PHILO_MAX 310
 
 typedef struct s_data
 {
@@ -52,7 +53,6 @@ typedef struct s_philo
 typedef struct s_fork
 {
 	pthread_mutex_t	mutex_fork;
-	t_list			*waiting;
 }	t_fork;
 
 void	*thread_philo(void *arg);

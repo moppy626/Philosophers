@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:58:25 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 15:38:17 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/14 15:39:48 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	create_threads(t_list	*list, t_data *data)
 	while (tmp)
 	{
 		philo = tmp->content;
+		philo->lastmeal_time = data->starttime;
 		result = pthread_create(&philo->thread, NULL, thread_philo, philo);
 		if (result != 0)
 			return (err_and_return_int("create_threads"));

@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:38:59 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 15:40:24 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/14 18:32:13 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char *argv[])
 	philos = init_philo(data);
 	if (!philos)
 		return (-1);
+	data->starttime = get_current_time();
 	if (create_threads(philos, data) < 0)
 		return (-1);
 	if (wait_threads(philos, data) < 0)
@@ -50,8 +51,6 @@ void	delete_fork(void	*list)
 	if (fork)
 	{
 		pthread_mutex_destroy(&fork->mutex_fork);
-		if (fork->waiting)
-			ft_lstclear(&fork->waiting, NULL);
 		free (fork);
 	}
 }

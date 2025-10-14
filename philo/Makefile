@@ -6,7 +6,7 @@
 #    By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/23 13:58:21 by mmachida          #+#    #+#              #
-#    Updated: 2025/09/29 15:27:01 by mmachida         ###   ########.fr        #
+#    Updated: 2025/10/14 18:31:18 by mmachida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_LST = 	ft_lstadd_front.c ft_lstdelone.c ft_lstlast.c ft_lstnew.c \
 SRC_LST := $(addprefix ft_lst/, $(SRC_LST))
 
 SRC_TOOLS = ft_atoi.c err_tools.c time_tools.c \
-			d_fork_waitinglist.c d_lastmeal_time.c d_num_of_meals.c d_stopped.c
+			d_lastmeal_time.c d_num_of_meals.c d_stopped.c
 SRC_TOOLS := $(addprefix tools/, $(SRC_TOOLS))
 
 SRC = $(SRC_PHILO) $(SRC_LST) $(SRC_TOOLS)

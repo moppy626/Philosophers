@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 16:49:00 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/09 14:09:37 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/14 18:31:38 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ void	add_num_of_meals(t_philo **philo);
 int		get_num_of_meals(t_philo *philo);
 long	get_current_time(void);
 long	get_elapsed_time(long ref_time);
-void	add_fork_waitinglist(t_philo *philo, t_fork *fork);
-void	upd_fork_waitinglist(t_philo *philo, t_fork *fork);
-int		get_fork_waiting_status(t_philo *philo, t_fork *fork);
 long	to_ms(long micro_s);
 void	wait_micro_s(long wait_time, t_data *data);
 long	to_micros(long mili_s);

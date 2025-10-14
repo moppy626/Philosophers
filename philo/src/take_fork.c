@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:20:43 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/09 14:38:39 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/14 15:08:43 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ t_fork	*take_fork(t_philo *philo, int forkid)
 	t_fork	*fork;
 
 	fork = get_fork_from_idx(philo->d->forks, forkid);
-	add_fork_waitinglist(philo, fork);
-	while (1)
-	{
-		wait_micro_s(10, philo->d);
-		if (philo->id == get_fork_waiting_status(philo, fork))
-		{
-			upd_fork_waitinglist(philo, fork);
-			break ;
-		}
-	}
 	pthread_mutex_lock(&fork->mutex_fork);
 	print_stat(philo->d, philo->id, "has taken a fork");
 	return (fork);
