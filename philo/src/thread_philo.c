@@ -6,12 +6,14 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:04:55 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/15 18:08:16 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/15 23:19:45 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 #include <stdio.h>
+
+int		to_micros_atleast2(int time);
 
 int	eating(t_philo *philo)
 {
@@ -47,16 +49,14 @@ int	sleeping(t_philo *philo)
 int	thinking(t_philo *philo)
 {
 	print_stat(philo->d, philo->id, "is thinking");
+	// if(get_elapsed_time(get_lastmeal_time(philo))
+	// 	< to_micros(philo->d->time_to_eat + philo->d->time_to_sleep
+	// 	+ MICRO_MILI) && philo->id % 2 == 0)
+	if (philo->d->num_of_philo % 2 == 1)
+		wait_micro_s(to_micros(philo->d->time_to_eat) / 2, philo->d);
 	return (0);
 }
 
-int		to_micros_atleast2(int time)
-{
-	if (time == 0)
-		return (to_micros(2));
-	else
-		return (to_micros(time));
-}
 void	*thread_philo(void *arg)
 {
 	t_philo	*philo;
@@ -68,8 +68,8 @@ void	*thread_philo(void *arg)
 		wait_micro_s(to_micros(philo->d->time_to_die), philo->d);
 		return (NULL);
 	}
-	if (philo->id % 2 == 1)
-		wait_micro_s(to_micros_atleast2(philo->d->time_to_eat) / 2, philo->d);
+	if (philo->id % 2 == 0)
+		wait_micro_s(to_micros(philo->d->time_to_eat) / 2, philo->d);
 	while (1)
 	{
 		if (get_stopped(philo->d))

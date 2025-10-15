@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:21:33 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/15 16:41:54 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/15 22:12:52 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ long	get_elapsed_time(long ref_time)
 	return (ret);
 }
 
-#define REMAIN_TIME 5000
 /*
 	マイクロ秒で指定された引数分待機する
 */

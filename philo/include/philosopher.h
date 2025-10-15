@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/15 18:02:19 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/15 22:13:05 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # endif
 
 # define MONITOR_SLEEP 200
+# define REMAIN_TIME 5000
 
 typedef struct s_data
 {
