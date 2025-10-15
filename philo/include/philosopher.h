@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/14 19:28:32 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/15 18:02:19 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # endif
 
 # define MONITOR_SLEEP 200
-# define PHILO_MAX 201
 
 typedef struct s_data
 {
@@ -39,21 +38,22 @@ typedef struct s_data
 	pthread_mutex_t	mutex_data;
 }	t_data;
 
+typedef struct s_fork
+{
+	pthread_mutex_t	mutex_fork;
+}	t_fork;
+
+
 typedef struct s_philo
 {
 	int				id;
-	int				right_fork;
-	int				left_fork;
+	t_fork			*right_fork;
+	t_fork			*left_fork;
 	long			lastmeal_time;
 	int				num_of_meals;
 	pthread_t		thread;
 	t_data			*d;
 }	t_philo;
-
-typedef struct s_fork
-{
-	pthread_mutex_t	mutex_fork;
-}	t_fork;
 
 void	*thread_philo(void *arg);
 void	*thread_monitor(void *arg);
@@ -64,6 +64,6 @@ int		print_stat(t_data *data, int id, char *msg);
 int		print_died(t_data *data, int id);
 int		check_args(int argc, char *argv[]);
 t_data	*init_data(int argc, char *argv[]);
-t_fork	*take_fork(t_philo *philo, int forkid);
+t_fork	*take_fork(t_philo *philo, t_fork *fork);
 
 #endif

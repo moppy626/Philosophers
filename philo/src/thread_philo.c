@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:04:55 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/14 19:06:30 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/15 18:08:16 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@ int	eating(t_philo *philo)
 	t_fork	*right_fork;
 	t_fork	*left_fork;
 
-	right_fork = take_fork(philo, philo->right_fork);
-	if (get_stopped(philo->d))
+	if (philo->id == philo->d->num_of_philo)
 	{
-		pthread_mutex_unlock(&right_fork->mutex_fork);
-		return (-1);
+		right_fork = take_fork(philo, philo->right_fork);
+		left_fork = take_fork(philo, philo->left_fork);
 	}
-	left_fork = take_fork(philo, philo->left_fork);
+	else
+	{
+		left_fork = take_fork(philo, philo->left_fork);
+		right_fork = take_fork(philo, philo->right_fork);
+	}
 	print_stat(philo->d, philo->id, "is eating");
 	set_lastmeal_time(&philo, get_current_time());
 	wait_micro_s(to_micros(philo->d->time_to_eat), philo->d);
@@ -47,6 +50,13 @@ int	thinking(t_philo *philo)
 	return (0);
 }
 
+int		to_micros_atleast2(int time)
+{
+	if (time == 0)
+		return (to_micros(2));
+	else
+		return (to_micros(time));
+}
 void	*thread_philo(void *arg)
 {
 	t_philo	*philo;
@@ -58,8 +68,8 @@ void	*thread_philo(void *arg)
 		wait_micro_s(to_micros(philo->d->time_to_die), philo->d);
 		return (NULL);
 	}
-	if (philo->id % 2 == 0)
-		wait_micro_s(to_micros(philo->d->time_to_eat / 2), philo->d);
+	if (philo->id % 2 == 1)
+		wait_micro_s(to_micros_atleast2(philo->d->time_to_eat) / 2, philo->d);
 	while (1)
 	{
 		if (get_stopped(philo->d))

@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:21:33 by mmachida          #+#    #+#             */
-/*   Updated: 2025/09/29 15:51:52 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/15 16:41:54 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	wait_micro_s(long wait_time, t_data *data)
 	start_time = get_current_time();
 	if (wait_time > REMAIN_TIME)
 	{
-		while (1)
+		while (wait_time != 0)
 		{
 			elapsed_time = get_elapsed_time(start_time);
 			if (elapsed_time >= (wait_time - REMAIN_TIME))
@@ -69,7 +69,7 @@ void	wait_micro_s(long wait_time, t_data *data)
 			usleep(1000);
 		}
 	}
-	while (1)
+	while (wait_time != 0)
 	{
 		elapsed_time = get_elapsed_time(start_time);
 		if (elapsed_time >= wait_time)
