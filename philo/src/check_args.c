@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:02:27 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/15 17:45:02 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/16 11:46:53 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int	check_args(int argc, char *argv[])
 	{
 		if (check_int(argv[idx]) < 0)
 			return (-1);
-		if (ft_atoi(argv[4]) <= 0)
-			return (arg_error("Set the 5th parameter to 1 or higher."));
-		if (ft_atoi(argv[1]) <= 0)
-			return (arg_error("Set the 1st parameter to 1 or higher."));
-		if (ft_atoi(argv[2]) <= 0)
-			return (arg_error("Set the 2nd parameter to 60 or higher."));
 		idx++;
 	}
+	if (ft_atoi(argv[1]) <= 0)
+		return (arg_error("Set the 1st parameter to 1 or higher."));
+	if (ft_atoi(argv[2]) <= 0)
+		return (arg_error("Set the 2nd parameter to 60 or higher."));
+	if (argc == 6 && ft_atoi(argv[5]) <= 0)
+		return (arg_error("Set the 5th parameter to 1 or higher."));
 	return (0);
 }
 
