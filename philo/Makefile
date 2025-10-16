@@ -6,11 +6,11 @@
 #    By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/23 13:58:21 by mmachida          #+#    #+#              #
-#    Updated: 2025/10/14 18:31:18 by mmachida         ###   ########.fr        #
+#    Updated: 2025/10/16 15:11:40 by mmachida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc -Wall -Wextra -Werror #-D DEBUG=1
+CC = cc -Wall -Wextra -Werror -Wconversion #-D DEBUG=1
 NAME = philo
 
 SRC_PHILO = main.c thread_monitor.c thread_philo.c check_args.c\

@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:21:33 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/15 22:12:52 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:23:00 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 #include <limits.h> // LONG_MAX
 #include "tools.h"
 
-long	get_current_time(void)
-
 /*
-	現在時刻を取得する(ms)
+現在時刻を取得する(ms)
 */
+long	getnow(void)
 {
 	struct timeval	tv;
 	long			tv_sec;
@@ -40,7 +39,7 @@ long	get_elapsed_time(long ref_time)
 	long	current;
 	long	ret;
 
-	current = get_current_time();
+	current = getnow();
 	if (current < 0)
 		return (-1);
 	ret = current - ref_time;
@@ -50,12 +49,10 @@ long	get_elapsed_time(long ref_time)
 /*
 	マイクロ秒で指定された引数分待機する
 */
-void	wait_micro_s(long wait_time, t_data *data)
+void	wait_micro_s(long start_time, long wait_time, t_data *data)
 {
-	long	start_time;
 	long	elapsed_time;
 
-	start_time = get_current_time();
 	if (wait_time > REMAIN_TIME)
 	{
 		while (wait_time != 0)

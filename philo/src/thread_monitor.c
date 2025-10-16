@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:21 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/09 14:09:54 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:19:21 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	*thread_monitor(void *arg)
 			set_stopped(philo->d, 1);
 			break ;
 		}
-		wait_micro_s(10, philo->d);
+		wait_micro_s(getnow(), 10, philo->d);
 	}
 	return (NULL);
 }

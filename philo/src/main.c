@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:38:59 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/16 10:47:14 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:19:17 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char *argv[])
 	philos = init_philo(data);
 	if (!philos)
 		return (-1);
-	data->starttime = get_current_time();
+	data->starttime = getnow();
 	if (create_threads(philos, data) < 0)
 		return (-1);
 	if (wait_threads(philos, data) < 0)

@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:30:09 by user42            #+#    #+#             */
-/*   Updated: 2025/09/23 16:52:05 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/16 15:40:40 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static int	is_space(char c);
 
 int	ft_atoi(const char *str)
 {
-	long	ret;
-	int		i;
-	int		fugou;
+	int			ret;
+	int			i;
+	int			fugou;
 
 	i = 0;
 	while (is_space((char)str[i]))
