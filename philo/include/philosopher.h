@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/15 22:13:05 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/16 10:42:04 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_philo
 	t_fork			*left_fork;
 	long			lastmeal_time;
 	int				num_of_meals;
+	pthread_mutex_t	mutex_philo;
 	pthread_t		thread;
 	t_data			*d;
 }	t_philo;

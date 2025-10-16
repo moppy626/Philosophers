@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:04:55 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/15 23:19:45 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/16 11:36:24 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	eating(t_philo *philo)
 		right_fork = take_fork(philo, philo->right_fork);
 	}
 	print_stat(philo->d, philo->id, "is eating");
+	// if (philo->id % 2 == 0 || get_num_of_meals(philo) > 0)
 	set_lastmeal_time(&philo, get_current_time());
 	wait_micro_s(to_micros(philo->d->time_to_eat), philo->d);
 	add_num_of_meals(&philo);
@@ -49,9 +50,6 @@ int	sleeping(t_philo *philo)
 int	thinking(t_philo *philo)
 {
 	print_stat(philo->d, philo->id, "is thinking");
-	// if(get_elapsed_time(get_lastmeal_time(philo))
-	// 	< to_micros(philo->d->time_to_eat + philo->d->time_to_sleep
-	// 	+ MICRO_MILI) && philo->id % 2 == 0)
 	if (philo->d->num_of_philo % 2 == 1)
 		wait_micro_s(to_micros(philo->d->time_to_eat) / 2, philo->d);
 	return (0);

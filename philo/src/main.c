@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:38:59 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/14 18:32:13 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/16 10:47:14 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	delete_philo(void *list)
 	philo = (t_philo *)list;
 	if (philo)
 	{
+		pthread_mutex_destroy(&philo->mutex_philo);
 		free (philo);
 	}
 }

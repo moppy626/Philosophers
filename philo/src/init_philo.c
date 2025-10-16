@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:00:51 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/15 18:00:23 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/16 10:50:35 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	add_new_philo(t_list **list, int id, t_data *data)
 		philo->left_fork = get_fork_from_idx(data->forks, 0);
 	else
 		philo->left_fork = get_fork_from_idx(data->forks, id);
+	if (pthread_mutex_init(&philo->mutex_philo, NULL) < 0)
+		return (err_and_return_int("add_new_philo"));
 	philo->num_of_meals = 0;
 	philo->d = data;
 	tmp = ft_lstnew(philo);
