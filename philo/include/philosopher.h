@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:03:42 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/16 16:22:33 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/17 15:20:17 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_data
 	t_list			*forks;
 	pthread_mutex_t	mutex_print;
 	pthread_mutex_t	mutex_data;
+	pthread_mutex_t	mutex_init;
 }	t_data;
 
 typedef struct s_fork

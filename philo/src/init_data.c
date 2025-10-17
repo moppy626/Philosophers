@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:05:20 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/15 18:02:15 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/17 15:20:26 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_data	*init_data(int argc, char *argv[])
 	if (pthread_mutex_init(&data->mutex_print, NULL) < 0)
 		return (err_and_return_null("init_data"));
 	if (pthread_mutex_init(&data->mutex_data, NULL) < 0)
+		return (err_and_return_null("init_data"));
+	if (pthread_mutex_init(&data->mutex_init, NULL) < 0)
 		return (err_and_return_null("init_data"));
 	if (init_forks(data) < 0)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:38:59 by mmachida          #+#    #+#             */
-/*   Updated: 2025/10/16 16:19:17 by mmachida         ###   ########.fr       */
+/*   Updated: 2025/10/17 15:53:20 by mmachida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include "tools.h"
 
+void	set_time(t_data	*data, t_list *list);
 void	delete_fork(void	*list);
 void	delete_data(t_data	*data);
 void	delete_philo(void *list);
@@ -33,7 +34,6 @@ int	main(int argc, char *argv[])
 	philos = init_philo(data);
 	if (!philos)
 		return (-1);
-	data->starttime = getnow();
 	if (create_threads(philos, data) < 0)
 		return (-1);
 	if (wait_threads(philos, data) < 0)
@@ -61,6 +61,7 @@ void	delete_data(t_data	*data)
 	{
 		pthread_mutex_destroy(&data->mutex_print);
 		pthread_mutex_destroy(&data->mutex_data);
+		pthread_mutex_destroy(&data->mutex_init);
 		ft_lstclear(&data->forks, &delete_fork);
 		free (data);
 	}
